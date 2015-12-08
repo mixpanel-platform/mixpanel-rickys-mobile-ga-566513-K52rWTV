@@ -6,7 +6,7 @@
     <link rel="stylesheet" type="text/css" href="https://cdn.mxpnl.com/libs/mixpanel-platform/build/mixpanel-platform.v0.latest.min.css">
     <script src="https://d3js.org/d3.v3.min.js"></script>
     <script src="https://code.jquery.com/jquery-2.1.4.js"></script>
-    <script src="mixpanel-platform.min.js"></script>
+    <script src="https://cdn.mxpnl.com/libs/mixpanel-platform/build/mixpanel-platform.v0.latest.min.js"></script>
   </head>
   <body class="mixpanel-platform-body">
     <style>
@@ -315,7 +315,6 @@
       });
 
       // custom query
-      MP.api.setCredentials('38c148dea80e5275078afc8d3ed8db10', 'bf7a39e99c9d0a006e112693736a3e20');
       function runQuery() {
         // set up parameters
         event_list = $('#event_list').val().split(',');
@@ -335,13 +334,11 @@
             from_date: date_to_string(dateVal.from),
             to_date: date_to_string(dateVal.to),
           }
-        var params = {
-          params: JSON.stringify(queryParams)
-        };
+        var params = JSON.stringify(queryParams);
         var script = $('#cq').html();
         script = $.trim(script);
         
-        MP.api.custom_query(script, params).done(function(results) {
+        MP.api.custom_query(script, queryParams).done(function(results) {
           cqResult = results[0];
           for (var i = 0; i < event_list.length; i++) {
             var first = i == 0 ? true : false;
@@ -727,4 +724,3 @@
 
   </body>
 </html>
-
